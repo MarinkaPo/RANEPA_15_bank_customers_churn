@@ -247,7 +247,7 @@ st.markdown('''<h2 style="text-align: left; color: black;"> Выводы по п
 
 st.markdown('''
 \n 1. Начиная работу по задаче, в первую очередь следует смотреть на общую картину данных: статиситческие показатели, распределение данных и зависимости в них.
-\n 2. Для этого хорошо помогают методы библиотек [pandas](https://pandas.pydata.org/docs/user_guide/index.html) и [matplotlib](https://matplotlib.org/stable/api/index.html).
+\n 2. Для этого хорошо помогают инструменты библиотек [pandas](https://pandas.pydata.org/docs/user_guide/index.html) и [matplotlib](https://matplotlib.org/stable/api/index.html).
 ''')
 
 # st.markdown('''<h2 style="text-align: left; color: black;">Блок 3: Прогноз оттока клиентов с помощью инструментов машинного обучения: </h2>''', 
