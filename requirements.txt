@@ -4,7 +4,7 @@ streamlit==1.10.0. # ok
 pandas==1.4.1 # 1.3.5
 matplotlib==3.4.3 # ok
 seaborn==0.11.2 # ok
-numpy==1.19.5 # ok
+numpy==1.21.0 # ok 1.19.5
 
 scikit-learn==1.0.1
 
