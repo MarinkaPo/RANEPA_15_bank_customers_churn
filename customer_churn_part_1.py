@@ -1,4 +1,6 @@
+from turtle import width
 import streamlit as st
+from dash import Dash, html
 from PIL import Image
 # import joblib
 # from joblib import dump, load
@@ -7,6 +9,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go
 # import random
 # import warnings
 from sklearn.model_selection import train_test_split
@@ -26,9 +29,9 @@ st.markdown('''<h1 style='text-align: center; color: #F64A46;'
 st.markdown('''<h2 style='text-align: center; color: #F64A46;'
             >Часть 1: Анализ данных</h2>''', 
             unsafe_allow_html=True)
-st.markdown('''<h3 style='text-align: center; color: #30BA8F;'
-            >Bank customer churn prediction: Part 1</h3>''', 
-            unsafe_allow_html=True)
+# st.markdown('''<h3 style='text-align: center; color: #30BA8F;'
+#             >Bank customer churn prediction: Part 1</h3>''', 
+#             unsafe_allow_html=True)
 
 img_churn = Image.open('customers_3.jpeg') #
 st.image(img_churn, use_column_width='auto') #width=450
@@ -41,6 +44,14 @@ st.write("""
 \n* **Вторая часть**: прогноз оттока клиентов с использованием методов машинного обучения""")
 
 st.markdown('''<h2 style='text-align: left; color: black;'
+            >Актуальность тематики</h2>''', 
+            unsafe_allow_html=True)
+st.write(""" \n##### **Почему необходимо изучать графический анализ данных и уметь оценивать статистические показатели?**
+\nИсследование данных - это основа принятия решений во всех видах бизнеса, не только в банковской сфере. Анализ многомерных данных и их обработка играет большую роль при управлении, так как позволяет делать оценки последствий принимаемых решений и видеть связи и взаимное влияние рассматриваемых компонентов бизнес-процесса. 
+\nЗачастую, аналитические срезы представляются в графическом виде: так легче проследить зависимость и сделать выводы в полном, даже слишком большом объёме данных, который сложно проанализировать человеку напрямую без вспомогательных инструментов.
+Поэтому способность работать с инструментами визуализации, умение делать выводы по графикам - являются неотъемлимыми навыками любого сотрудника, производящего аналитическую работу. """)
+
+st.markdown('''<h2 style='text-align: left; color: black;'
             >Задача:</h2>''', 
             unsafe_allow_html=True)
 st.write(""" \nПредположим, что вы - управляющий одного из отделения банка "Российкий". 
@@ -51,6 +62,9 @@ st.write(""" \nПредположим, что вы - управляющий од
 \nДанные подготовили сотрудники ЛИА РАНХиГС.
 """)
 #-------------------------Pipeline description-------------------------
+st.markdown('''<h2 style='text-align: left; color: black;'
+            >Этапы разработки кейса</h2>''', 
+            unsafe_allow_html=True)
 img_pipeline = Image.open('churn_pipeline.png') 
 st.image(img_pipeline, use_column_width='auto', caption='Общий пайплайн лабораторной работы') #width=450
 
@@ -120,6 +134,36 @@ st.markdown(''' \nНиже представлены 4 опции для прос
 
 if st.checkbox('Показать датасет'):
   number = st.number_input('Сколько строк показать', min_value=1, max_value=df.shape[1])
+  # fig = go.Figure(data=[go.Table(
+  #                               columnorder = [n for n in range(1, len(df.columns)+1)],
+  #                               columnwidth = [100]*len(df.columns),
+  #                               header=dict(values=list(df.columns),
+  #                                           line_color='black',
+  #                                           fill_color='gray',
+  #                                           align=['center']*len(df.columns),
+  #                                           font=dict(color='black', size=12),
+  #                                           height=50),                                            
+  #                               cells=dict(values=[df[col] for col in df.columns],
+  #                                           fill_color='white',
+  #                                           align=['center']*len(df.columns),
+  #                                           font=dict(color='black', size=12),
+  #                                           height=30))
+  #                             ])
+  # fig.update_layout(width=1000, margin=dict(b=10, l=10, r=10, t=10)) # bottom, left, right и top - отступы     title='Наша таблица', title_x=0.5, title_y=1,
+  
+  # fig = html.Table([
+  #       html.Thead(
+  #           html.Tr([html.Th(col) for col in df.columns])
+  #       ),
+  #       html.Tbody([
+  #           html.Tr([
+  #               html.Td(df[col]) for col in df.columns
+  #           ]) # for i in range(len(df))
+  #       ])
+  #   ], style={'marginLeft': 'auto', 'marginRight': 'auto'})
+
+
+  # st.plotly_chart(fig)
   st.dataframe(df.head(number))
 
 if st.checkbox('Показать названия колонок'):
@@ -173,7 +217,7 @@ genre = st.radio("Какие собранные характеристики к�
                 (('Активность клиента и наличие кредитной карты'), ('ID номер и фамилия'), ('Пол и возраст')), index=0)
 if genre == 'ID номер и фамилия':
   st.success('Ответ верный!')
-  st.balloons()
+  # st.balloons()
 else:
   st.error('Ответ неверный!') 
 
